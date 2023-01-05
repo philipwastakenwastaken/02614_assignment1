@@ -1,6 +1,14 @@
+#include <string.h>
 #include "matrix_math.h"
 #include <string.h>
 #include <stdlib.h>
+
+
+/* 
+*****************
+EXERCISE 1
+*****************
+*/
 
 int matmult_nat(int m, int n, int k, double** a, double** b, double** c)
 {
@@ -43,6 +51,95 @@ int matmult_lib(int m, int n, int k, double** a, double** b, double** c)
     return 0;
 }
 
+/* 
+*****************
+EXERCISE 2
+*****************
+*/
+
+int matmult_mnk(int m, int n, int k, double** a, double** b, double** c)
+{
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++)
+        {
+            c[i][j] = 0;
+            for (int l = 0; l < k; l++)
+                c[i][j] += a[i][l] * b[l][j];
+        }
+
+    return 0;
+}
+
+
+int matmult_nmk(int m, int n, int k, double** a, double** b, double** c)
+{
+    for (int j = 0; j < n; j++)
+        for (int i = 0; i < m; i++)
+        {
+            c[i][j] = 0;
+            for (int l = 0; l < k; l++)
+                c[i][j] += a[i][l] * b[l][j];
+        }
+
+    return 0;
+}
+
+
+int matmult_nkm(int m, int n, int k, double** a, double** b, double** c)
+{
+    memset(*c, 0, m*n*sizeof(double));
+    for (int j = 0; j < n; j++)
+        for (int l = 0; l < k; l++)
+            for (int i = 0; i < m; i++){
+                c[i][j] += a[i][l] * b[l][j];
+            }
+                
+    return 0;
+}
+
+
+int matmult_mkn(int m, int n, int k, double** a, double** b, double** c)
+{
+    memset(*c, 0, m*n*sizeof(double));
+    for (int i = 0; i < m; i++)
+        for (int l = 0; l < k; l++)
+            for (int j = 0; j < n; j++){
+                c[i][j] += a[i][l] * b[l][j];
+            }
+
+    return 0;
+}
+
+int matmult_kmn(int m, int n, int k, double** a, double** b, double** c)
+{
+    memset(*c, 0, m*n*sizeof(double));
+    for (int l = 0; l < k; l++)
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++){
+                c[i][j] += a[i][l] * b[l][j];
+            }
+
+    return 0;
+}
+
+int matmult_knm(int m, int n, int k, double** a, double** b, double** c)
+{
+    memset(*c, 0, m*n*sizeof(double));
+    for (int l = 0; l < k; l++)
+        for (int j = 0; j < n; j++)
+            for (int i = 0; i < m; i++){
+                c[i][j] += a[i][l] * b[l][j];
+            }
+
+    return 0;
+}
+
+
+/* 
+*****************
+EXERCISE 4
+*****************
+*/
 int matmult_blk(int m, int n, int k, double** a, double** b, double** c, int bs)
 {
     memset(*c, 0, sizeof(double) * m * n);
@@ -59,5 +156,5 @@ int matmult_blk(int m, int n, int k, double** a, double** b, double** c, int bs)
             }
         }
     }
-    return 0;
+
 }
