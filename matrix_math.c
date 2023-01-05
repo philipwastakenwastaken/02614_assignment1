@@ -3,8 +3,9 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define min(x,y) (x<y ? x:y)
 
-/* 
+/*
 *****************
 EXERCISE 1
 *****************
@@ -51,11 +52,13 @@ int matmult_lib(int m, int n, int k, double** a, double** b, double** c)
     return 0;
 }
 
-/* 
+/*
 *****************
 EXERCISE 2
 *****************
 */
+
+// mkn is the fastest
 
 int matmult_mnk(int m, int n, int k, double** a, double** b, double** c)
 {
@@ -93,7 +96,7 @@ int matmult_nkm(int m, int n, int k, double** a, double** b, double** c)
             for (int i = 0; i < m; i++){
                 c[i][j] += a[i][l] * b[l][j];
             }
-                
+
     return 0;
 }
 
@@ -135,7 +138,7 @@ int matmult_knm(int m, int n, int k, double** a, double** b, double** c)
 }
 
 
-/* 
+/*
 *****************
 EXERCISE 4
 *****************
@@ -157,4 +160,5 @@ int matmult_blk(int m, int n, int k, double** a, double** b, double** c, int bs)
         }
     }
 
+    return 0;
 }
