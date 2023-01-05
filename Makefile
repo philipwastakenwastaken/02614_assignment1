@@ -2,7 +2,7 @@ TARGET	= libmatmult.so
 LIBSRCS	= matrix_math.c
 LIBOBJS	= matrix_math.o
 
-OPT	= -g -Ofast -std=c99 -fprofile-use
+OPT	= -g -O3 -std=c99 -funroll-loops
 PIC	= -fPIC
 
 CC	= gcc
