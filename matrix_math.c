@@ -143,22 +143,25 @@ int matmult_knm(int m, int n, int k, double** a, double** b, double** c)
 EXERCISE 4
 *****************
 */
+
 int matmult_blk(int m, int n, int k, double** a, double** b, double** c, int bs)
 {
     memset(*c, 0, sizeof(double) * m * n);
     for (int start_m = 0; start_m < m; start_m += bs){
-        for (int now_m = start_m; now_m < min(m, start_m + bs); now_m++){
-            for (int start_k = 0; start_k < k; start_k += bs){
-                for (int now_k = start_k; now_k < min(k, start_k + bs); now_k++){
-                    for (int start_n = 0; start_n < n; start_n += bs){
-                        for (int now_n = start_n; now_n < min(n, start_n + bs); now_n++){
-                            c[now_m][now_n] += a[now_m][now_k] * b[now_k][now_n];
+        int min_m = min(m, start_m + bs);
+        for (int start_k = 0; start_k < k; start_k += bs){
+            int min_k = min(k, start_k + bs);
+            for (int start_n = 0; start_n < n; start_n += bs){
+                int min_n = min(n, start_n + bs);
+                for (int now_m = start_m; now_m < min_m; now_m++){
+                    for (int now_k = start_k; now_k < min_k; now_k++){
+                        for (int now_n = start_n; now_n < min_n; now_n++){
+                         c[now_m][now_n] += a[now_m][now_k] * b[now_k][now_n];
                         }
                     }
                 }
             }
         }
     }
-
-    return 0;
+ return 0;
 }
